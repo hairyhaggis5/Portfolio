@@ -15,40 +15,55 @@
     </div>
     <div class="header-right">
       <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#resume">Resume</a>
-      </nav>
+        <a href="#about" data-section="about" class="nav-link active">About</a>
+        <a href="#experience" data-section="experience" class="nav-link">Experience</a>
+        <a href="#projects" data-section="projects" class="nav-link">Projects</a>
+              </nav>
     </div>
   </div>
 </header>
 
   <main>
     <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About</h2>
-        <p>
-          I’m a GIS and data professional with experience leading global geospatial projects,
-          managing remote teams, and delivering high-quality mapping and analysis products.
-          I hold a Master’s in Data Science and a Master’s in GIS, with an undergraduate
-          background in Environmental Studies. My work blends geospatial analysis, field data
-          collection, and software-supported workflows to turn complex spatial data into
-          clear, actionable insight.
-        </p>
-        <p>
-          I’ve managed international ground imagery programs, contributed to OpenStreetMap road
-          networks, led solar farm suitability studies for utilities, and supported UI/UX
-          improvements for internal imagery-viewing platforms. I enjoy building maps, stories,
-          and tools that help people understand the world a little better and make better
-          decisions about it.
-        </p>
+    <section id="about" class="section page-section active">
+      <div class="container about-content">
+        
+        <img src="headshot_hh.png", alt="Hamish Headshot", class="about-photo" />
+        <div class="about-text">
+            <h2>About Me</h2>
+            <p>
+                I’m a GIS and data professional with experience leading global geospatial projects,
+                managing remote teams, and delivering high quality mapping and analysis products.
+                I hold a Master’s Degree in both Data Science and GIS, with an undergraduate
+                background in Environmental Studies. My work blends geospatial analysis, field data
+                collection, data analytics and software-supported workflows to turn complex spatial data into
+                clear, actionable insight.
+            </p>
+            <p>
+                I’ve managed international ground imagery programs, contributed to OpenStreetMap road
+                networks, led solar farm suitability studies for utilities, and supported UI/UX
+                improvements for internal imagery-viewing platforms. I enjoy building maps, stories,
+                and tools that help people understand the world a little better and make better
+                decisions about it.
+            </p>
+         <a href="HamishHendersonResume.pdf" class="social-item" target="_blank">
+            Resume
+            <svg viewBox="0 0 24 24" class="icon">
+                Resume
+            <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm0 2l4 4h-4Z"/>
+            Resume
+  </svg>
+</a>
+   
+             
+        
+        </div>
       </div>
+      
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience" class="section section-alt">
+    <section id="experience" class="section section-alt page-section">
       <div class="container">
         <h2>Experience</h2>
 
@@ -116,7 +131,7 @@
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" class="section">
+    <section id="projects" class="section page-section">
       <div class="container">
         <h2>Selected Projects</h2>
 
@@ -188,68 +203,85 @@
       </div>
     </section>
 
-    <!-- RESUME -->
-    <section id="resume" class="section section-alt">
-      <div class="container">
-        <h2>Resume</h2>
-        <p>
-          You can view or download my full resume using the link below. For additional details or
-          references, feel free to contact me directly.
-        </p>
-        <p>
-          📄 <a href="HamishHendersonResume.pdf" target="_blank">Download Resume (PDF)</a>
-        </p>
-      </div>
-    </section>
+    
   </main>
 
   <footer class="site-footer">
+    <div class="social-links">
+
+ 
+
+  <a href="https://www.linkedin.com/in/hamish-henderson" target="_blank" class="social-item">
+    <!-- LinkedIn logo -->
+    <img src="images/linkedin_icon.svg" alt=" LinkedIn" class="social-img" />
+  </a>
+
+  <a href="mailto:hamish.d.henderson25@gmail.com" class="social-item">
+    <!-- Email icon -->
+    <img src="images/mail.png" alt=" Email" class="social-mail-img" />   
+  </a>
+
+  <a href="https://www.instagram.com/cheesy_totchos" target="_blank" class="social-item">
+    <!-- Instagram icon -->
+     <img src="images/Instagram_icon.png" alt=" Instagram" class="social-img" />
+  </a>
+
+   <a href="https://www.openstreetmap.org/user/hairyhaggis" target="_blank" class="social-item">
+  <!-- OpenStreetMap Icon -->
+  <img src="images/osm-logo.svg" alt=" OpenStreetMap" class="social-img" />
+    
+</a>
+
+
+
+
+</div>
+    
     <div class="container">
       <p>&copy; <span id="year"></span> Hamish Henderson. All rights reserved.</p>
     </div>
   </footer>
 
-  <script>
-  // keep footer year current (only if #year exists)
+ <script>
+  // keep footer year current
   const yearEl = document.getElementById('year');
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  const body = document.body;
-  const toggleBtn = document.getElementById('theme-toggle');
+  // tab-like navigation
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.page-section');
 
-  // if toggle button isn't found, don't do anything else
-  if (!toggleBtn) {
-    console.warn('Theme toggle button not found');
-  } else {
-    // Check saved preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // stop the default jump scrolling
 
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      body.classList.add('dark');
-      toggleBtn.textContent = '☀️ Light';
-    }
+      const targetId = link.dataset.section;
 
-    function setTheme(isDark) {
-      if (isDark) {
-        body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        toggleBtn.textContent = '☀️ Light';
-      } else {
-        body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        toggleBtn.textContent = '🌙 Dark';
+      // remove active from all links
+      navLinks.forEach(l => l.classList.remove('active'));
+      // add active to clicked link
+      link.classList.add('active');
+
+      // hide all sections
+      sections.forEach(sec => sec.classList.remove('active'));
+      // show the matching section
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        targetSection.classList.add('active');
       }
-    }
 
-    toggleBtn.addEventListener('click', () => {
-      const willBeDark = !body.classList.contains('dark');
-      setTheme(willBeDark);
+      // optional: update URL hash without jumping
+      history.replaceState(null, "", `#${targetId}`);
     });
+  });
+
+  // Optional: on load, show section based on URL hash (if any)
+  const initialHash = window.location.hash.replace("#", "");
+  if (initialHash) {
+    const initialLink = document.querySelector(`.nav-link[data-section="${initialHash}"]`);
+    if (initialLink) initialLink.click();
   }
 </script>
 </body>
